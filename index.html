@@ -3,184 +3,299 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redeem Invite</title>
+  <title>Catware - Portal</title>
   <style>
-    html,
+    /* --- CORE STYLES --- */
     body {
-        background: rgba(10, 10, 10, 0.9);
-        overflow: hidden;
-        height: 100%;
-        margin: 0;
-        padding: 0;
+      background-color: #0a0a0a;
+      color: #cccccc;
+      font-family: 'Verdana', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAlSURBVChTYxAREfnPw8PzHxeNogCGkfnEmQDDyDph/IF3A89/ABQxTIGh/maWAAAAAElFTkSuQmCC');
+      background-repeat: repeat;
     }
-
-    .ctr {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        width: 100vw;
-        position: fixed;
-        top: 0;
-        left: 0;
+    .container {
+      background: rgba(18, 18, 18, 0.95);
+      border: 1px solid #3c3c3c;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.9);
+      width: 340px;
+      text-align: center;
+      position: relative;
+      backdrop-filter: blur(5px);
     }
-
-    .bg {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        flex-direction: column;
-        min-width: 213px;
-        min-height: 135px;
-        width: max-content;
-        height: auto;
-        background: rgba(10, 10, 10, 0.9);
-        color: white;
-        z-index: 999999999;
-        border: 1px solid #050505;
-        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAlSURBVChTYxAREfnPw8PzHxeNogCGkfnEmQDDyDph/IF3A89/ABQxTIGh/maWAAAAAElFTkSuQmCC') repeat;
-        font-family: 'Verdana', sans-serif !important;
-        font-size: 13px !important;
-        color: #cccccc;
+    .rainbow-line {
+      height: 2px;
+      background: linear-gradient(to right, #ff85c2, #d17cf0, #ff99d1, #d17cf0);
+      background-size: 200% 100%;
+      animation: shimmer 2s linear infinite;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
     }
-
-    .border_light { border: 1px solid #3c3c3c; flex: 1; display: flex; flex-direction: column; }
-    .border_dark { border: 3px solid #282828; flex: 1; display: flex; flex-direction: column; }
-    .border_inside { border: 1px solid #3c3c3c; flex: 1; display: flex; flex-direction: column; }
-
-    .rainbow_container { display: flex; flex-direction: column; width: 100%; height: 3px; }
-    .rainbow_1, .rainbow_2 { height: 1px; width: 100%; background-size: 200% 100%; animation: shimmer 2s linear infinite; }
-    .rainbow_1 { background-image: linear-gradient(to right, #ff85c2, #d17cf0, #ff99d1, #d17cf0, #ff85c2); }
-    .rainbow_2 { background-image: linear-gradient(to right, #a658c2, #d66bb3, #a658c2, #d66bb3, #a658c2); animation-delay: 1s; }
-    .rainbow_3 { height: 1px; width: 100%; background: #090909; }
-
-    @keyframes shimmer {
-        0% { background-position: -100% 50%; }
-        100% { background-position: 100% 50%; }
-    }
-
-    .bg .items *, .item, .body {
-        font-family: 'Verdana' !important; letter-spacing: normal !important;
-        font-size: 13px !important; color: #cccccc; font-weight: 500;
-        text-shadow: 1px 1px 0px #050505;
-    }
-
-    .body { padding: 16px; }
-    .ctrd { display: flex; flex-direction: column; justify-content: center; align-items: center; }
-    .items { display: flex; flex-direction: column; flex: 1; }
-
-    .title { font-weight: bold !important; text-align: center; color: #cccccc; margin-bottom: 12px; }
-
+    @keyframes shimmer { 0% { background-position: -100% 50%; } 100% { background-position: 100% 50%; } }
+    
+    h2 { color: #cccccc; margin-top: 5px; letter-spacing: 2px; font-size: 18px; text-shadow: 1px 1px 0px #050505; }
+    h3 { color: #888; font-size: 13px; font-weight: normal; margin-bottom: 20px; }
+    .accent { color: #d17cf0; text-shadow: 0px 0px 8px rgba(209, 124, 240, 0.4); }
+    
+    /* --- INPUTS & BUTTONS --- */
     input {
-        background: #191919; border: 1px solid #323232; color: #cccccc;
-        font-family: 'Verdana', sans-serif !important; font-size: 13px;
-        padding: 6px 8px; margin-bottom: 8px; width: 165px;
-        box-sizing: border-box; outline: none; text-shadow: 1px 1px 0px #050505;
+      width: 100%; background: #191919; border: 1px solid #323232; color: #ccc;
+      padding: 12px; margin-bottom: 12px; box-sizing: border-box; outline: none;
+      font-family: 'Verdana', sans-serif; transition: border-color 0.2s;
     }
-    input:focus { border: 1px solid #d17cf0; }
-    input::placeholder { color: #555555; }
+    input:focus { border-color: #d17cf0; }
+    
+    button {
+      width: 100%; background: linear-gradient(0deg, #191919, #232323); border: 1px solid #323232;
+      color: #cccccc; padding: 12px; font-weight: bold; cursor: pointer; transition: all 0.2s;
+      font-family: 'Verdana', sans-serif; margin-bottom: 10px;
+    }
+    button:hover { background: linear-gradient(0deg, #232323, #343434); border-color: #d17cf0; color: white; }
+    button:active { background: linear-gradient(0deg, #232323, #191919); }
+    
+    .btn-download { background: rgba(209, 124, 240, 0.1); border: 1px solid #d17cf0; color: #d17cf0; margin-top: 10px; }
+    .btn-download:hover { background: rgba(209, 124, 240, 0.3); color: white; box-shadow: 0 0 10px rgba(209, 124, 240, 0.5); }
+    .btn-secondary { background: transparent; border: 1px dashed #555; color: #888; font-weight: normal; padding: 8px;}
+    .btn-secondary:hover { border-color: #d17cf0; color: #d17cf0; }
 
-    .button {
-        border: 1px solid #323232; display: flex; justify-content: center; align-items: center;
-        width: 165px; height: 24px; padding-bottom: 3px; margin-bottom: 8px; margin-top: 4px;
-        background: linear-gradient(0deg, #191919, #232323); outline: none;
-        font-weight: 700; text-decoration: none; color: #cccccc; cursor: pointer;
-    }
-    .button:hover { background: linear-gradient(0deg, #232323, #343434); border: 1px solid #d17cf0; }
-    .button:active { background: linear-gradient(0deg, #232323, #191919); }
-
-    #status {
-        margin-top: 8px; font-size: 11px !important; text-align: center;
-        display: none; max-width: 165px; word-wrap: break-word;
-    }
-    .status-success { color: #d17cf0 !important; display: block !important; }
-    .status-error { color: #ff5555 !important; display: block !important; }
+    /* --- PANELS & UTILS --- */
+    .panel { display: none; opacity: 0; transition: opacity 0.3s ease; }
+    .panel.active { display: block; opacity: 1; }
+    
+    .status { margin-top: 10px; font-size: 12px; display: none; word-wrap: break-word;}
+    .status-error { color: #ff5555; }
+    .status-success { color: #d17cf0; }
+    
+    .nav-row { display: flex; gap: 10px; margin-top: 15px; }
+    .nav-row button { margin-bottom: 0; padding: 8px; font-size: 11px;}
+    
+    .user-box { background: #050505; border: 1px solid #222; padding: 10px; margin-bottom: 15px; text-align: left; font-size: 12px;}
+    .user-box span { color: white; float: right;}
   </style>
 </head>
 <body>
 
-  <div class="ctr">
-      <div class="bg">
-          <div class="rainbow_container">
-              <div class="rainbow_1"></div>
-              <div class="rainbow_2"></div>
-              <div class="rainbow_3"></div>
-          </div>
-          <div class="border_light">
-              <div class="border_dark">
-                  <div class="border_inside">
-                      <div class="body ctrd">
-                          
-                          <div class="title">REDEEM INVITE</div>
-                          
-                          <div class="items">
-                              <form id="verifyForm" onsubmit="handleVerify(event)" class="ctrd">
-                                  <input type="text" id="key" placeholder="INVITE-KEY" required autocomplete="off" />
-                                  <input type="text" id="username" placeholder="Username" required autocomplete="username" />
-                                  <input type="password" id="password" placeholder="Password" required autocomplete="new-password" />
-                                  <button type="submit" id="submitBtn" class="button">Register</button>
-                              </form>
-                              
-                              <div id="status"></div>
-                          </div>
+  <div class="container">
+    <div class="rainbow-line"></div>
+    
+    <div id="view-home" class="panel active">
+      <h2><span class="accent">catware</span> portal</h2>
+      <h3>Authentication Gateway</h3>
+      <button onclick="nav('login')">Login</button>
+      <button onclick="nav('register')">Claim Invite</button>
+      <button class="btn-secondary" onclick="nav('forum')">Forums</button>
+    </div>
 
-                      </div>
-                  </div>
-              </div>
-          </div>
+    <div id="view-login" class="panel">
+      <h2>Login</h2>
+      <h3>Enter your credentials</h3>
+      <form onsubmit="handleLogin(event)">
+        <input type="text" id="logUser" placeholder="Username" required />
+        <input type="password" id="logPass" placeholder="Password" required />
+        <button type="submit" id="btnLog">Authenticate</button>
+      </form>
+      <button class="btn-secondary" onclick="nav('home')">Back</button>
+      <div id="statusLog" class="status status-error"></div>
+    </div>
+
+    <div id="view-register" class="panel">
+      <h2>Register</h2>
+      <h3>Claim your invite key</h3>
+      <form onsubmit="handleRegister(event)">
+        <input type="text" id="regKey" placeholder="INVITE-KEY" required autocomplete="off" />
+        <input type="text" id="regUser" placeholder="Choose Username" required />
+        <input type="password" id="regPass" placeholder="Choose Password" required />
+        <button type="submit" id="btnReg">Create Account</button>
+      </form>
+      <button class="btn-secondary" onclick="nav('home')">Back</button>
+      <div id="statusReg" class="status status-error"></div>
+    </div>
+
+    <div id="view-dashboard" class="panel">
+      <h2>Dashboard</h2>
+      <h3>Secure Session Active</h3>
+      
+      <div class="user-box">
+        Username: <span id="dashUser">...</span><br><br>
+        UID: <span id="dashUid">...</span>
       </div>
+
+      <button class="btn-download" onclick="downloadLoader()">Download Loader</button>
+      
+      <div class="nav-row">
+        <button onclick="nav('forum')">Forums</button>
+        <button onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <div id="view-forum" class="panel">
+      <h2>Forums</h2>
+      <h3>Community Hub</h3>
+      <div style="padding: 30px 0; color: #555; font-style: italic;">
+        Currently under construction.<br>Check back later.
+      </div>
+      <button class="btn-secondary" onclick="navDashboardOrHome()">Go Back</button>
+    </div>
+
   </div>
 
   <script>
-    // UPDATED: Now points to /register instead of /verify
-    const WORKER_URL = 'https://spring-bread-4ac0.patricksavells.workers.dev/register';
+    const API_BASE = 'https://spring-bread-4ac0.patricksavells.workers.dev';
 
-    async function handleVerify(event) {
-        event.preventDefault();
+    // --- NAVIGATION LOGIC ---
+    function nav(viewId) {
+      // Hide all panels
+      document.querySelectorAll('.panel').forEach(p => {
+        p.classList.remove('active');
+      });
+      
+      // Clear statuses
+      document.querySelectorAll('.status').forEach(s => s.style.display = 'none');
 
-        const keyInput = document.getElementById('key').value.trim();
-        const usernameInput = document.getElementById('username').value.trim();
-        const passwordInput = document.getElementById('password').value;
-        
-        const submitBtn = document.getElementById('submitBtn');
-        const statusDiv = document.getElementById('status');
+      // Show requested panel (with a tiny delay for fade effect)
+      setTimeout(() => {
+        document.getElementById(`view-${viewId}`).classList.add('active');
+      }, 50);
+    }
 
-        submitBtn.disabled = true;
-        submitBtn.innerText = 'Working...';
-        statusDiv.className = '';
-        statusDiv.style.display = 'none';
+    // Smart back button for Forums (goes to dashboard if logged in, otherwise home)
+    function navDashboardOrHome() {
+      if (localStorage.getItem('cw_user')) {
+        nav('dashboard');
+      } else {
+        nav('home');
+      }
+    }
 
-        try {
-            const response = await fetch(WORKER_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    key: keyInput,
-                    username: usernameInput,
-                    password: passwordInput
-                })
-            });
+    // Check if user is already logged in on page load
+    window.onload = () => {
+      const savedUser = localStorage.getItem('cw_user');
+      const savedUid = localStorage.getItem('cw_uid');
+      
+      if (savedUser && savedUid) {
+        // Hydrate dashboard
+        document.getElementById('dashUser').innerText = savedUser;
+        document.getElementById('dashUid').innerText = savedUid;
+        nav('dashboard');
+      }
+    };
 
-            const data = await response.json();
+    // --- AUTHENTICATION LOGIC ---
 
-            if (response.ok && data.success) {
-                statusDiv.className = 'status-success';
-                statusDiv.innerText = `Success! UID: ${data.uid}`;
-            } else {
-                statusDiv.className = 'status-error';
-                statusDiv.innerText = data.error || 'Failed.';
-            }
-        } catch (err) {
-            statusDiv.className = 'status-error';
-            statusDiv.innerText = 'Connection error.';
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerText = 'Register';
+    async function handleLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('logUser').value.trim();
+      const pass = document.getElementById('logPass').value;
+      const btn = document.getElementById('btnLog');
+      const stat = document.getElementById('statusLog');
+
+      btn.disabled = true; btn.innerText = 'Working...'; stat.style.display = 'none';
+
+      try {
+        const res = await fetch(`${API_BASE}/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: user, password: pass })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          // Save session
+          localStorage.setItem('cw_user', user);
+          localStorage.setItem('cw_uid', data.uid);
+          
+          // Setup and show dashboard
+          document.getElementById('dashUser').innerText = user;
+          document.getElementById('dashUid').innerText = data.uid;
+          
+          // Clear inputs
+          document.getElementById('logPass').value = '';
+          
+          nav('dashboard');
+        } else {
+          stat.className = 'status status-error';
+          stat.innerText = data.error || 'Invalid credentials.';
+          stat.style.display = 'block';
         }
+      } catch (err) {
+        stat.className = 'status status-error';
+        stat.innerText = 'Network error.';
+        stat.style.display = 'block';
+      } finally {
+        btn.disabled = false; btn.innerText = 'Authenticate';
+      }
+    }
+
+    async function handleRegister(e) {
+      e.preventDefault();
+      const key = document.getElementById('regKey').value.trim();
+      const user = document.getElementById('regUser').value.trim();
+      const pass = document.getElementById('regPass').value;
+      const btn = document.getElementById('btnReg');
+      const stat = document.getElementById('statusReg');
+
+      btn.disabled = true; btn.innerText = 'Working...'; stat.style.display = 'none';
+
+      try {
+        const res = await fetch(`${API_BASE}/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key, username: user, password: pass })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          stat.className = 'status status-success';
+          stat.innerText = 'Success! You may now login.';
+          stat.style.display = 'block';
+          
+          // Clear form
+          document.getElementById('regKey').value = '';
+          document.getElementById('regUser').value = '';
+          document.getElementById('regPass').value = '';
+          
+          // Auto-redirect to login after 2 seconds
+          setTimeout(() => nav('login'), 2000);
+        } else {
+          stat.className = 'status status-error';
+          stat.innerText = data.error || 'Registration failed.';
+          stat.style.display = 'block';
+        }
+      } catch (err) {
+        stat.className = 'status status-error';
+        stat.innerText = 'Network error.';
+        stat.style.display = 'block';
+      } finally {
+        btn.disabled = false; btn.innerText = 'Create Account';
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('cw_user');
+      localStorage.removeItem('cw_uid');
+      nav('home');
+    }
+
+    function downloadLoader() {
+      // REPLACE THIS URL with the actual link to your compiled loader
+      const FILE_URL = "https://github.com/your-name/your-repo/releases/latest/download/loader.exe";
+      
+      const a = document.createElement('a');
+      a.href = FILE_URL;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
   </script>
 </body>
