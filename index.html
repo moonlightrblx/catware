@@ -46,174 +46,55 @@
         color: #cccccc;
     }
 
-    .border_light {
-        border: 1px solid #3c3c3c;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
+    .border_light { border: 1px solid #3c3c3c; flex: 1; display: flex; flex-direction: column; }
+    .border_dark { border: 3px solid #282828; flex: 1; display: flex; flex-direction: column; }
+    .border_inside { border: 1px solid #3c3c3c; flex: 1; display: flex; flex-direction: column; }
 
-    .border_dark {
-        border: 3px solid #282828;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .border_inside {
-        border: 1px solid #3c3c3c;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .rainbow_container {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 3px;
-    }
-
-    .rainbow_1,
-    .rainbow_2 {
-        height: 1px;
-        width: 100%;
-        background-size: 200% 100%;
-        animation: shimmer 2s linear infinite;
-    }
-
-    .rainbow_1 {
-        background-image: linear-gradient(
-            to right,
-            #ff85c2, /* Soft hot pink */
-            #d17cf0, /* Lavender purple */
-            #ff99d1, /* Lighter pink */
-            #d17cf0,
-            #ff85c2
-        );
-    }
-
-    .rainbow_2 {
-        background-image: linear-gradient(
-            to right,
-            #a658c2, 
-            #d66bb3, 
-            #a658c2, 
-            #d66bb3, 
-            #a658c2
-        );
-        animation-delay: 1s;
-    }
-
-    .rainbow_3 {
-        height: 1px;
-        width: 100%;
-        background: #090909;
-    }
+    .rainbow_container { display: flex; flex-direction: column; width: 100%; height: 3px; }
+    .rainbow_1, .rainbow_2 { height: 1px; width: 100%; background-size: 200% 100%; animation: shimmer 2s linear infinite; }
+    .rainbow_1 { background-image: linear-gradient(to right, #ff85c2, #d17cf0, #ff99d1, #d17cf0, #ff85c2); }
+    .rainbow_2 { background-image: linear-gradient(to right, #a658c2, #d66bb3, #a658c2, #d66bb3, #a658c2); animation-delay: 1s; }
+    .rainbow_3 { height: 1px; width: 100%; background: #090909; }
 
     @keyframes shimmer {
-        0% {
-            background-position: -100% 50%;
-        }
-        100% {
-            background-position: 100% 50%;
-        }
+        0% { background-position: -100% 50%; }
+        100% { background-position: 100% 50%; }
     }
 
-    .bg .items *,
-    .item,
-    .body {
-        font-family: 'Verdana' !important;
-        letter-spacing: normal !important;
-        font-size: 13px !important;
-        color: #cccccc;
-        font-weight: 500;
+    .bg .items *, .item, .body {
+        font-family: 'Verdana' !important; letter-spacing: normal !important;
+        font-size: 13px !important; color: #cccccc; font-weight: 500;
         text-shadow: 1px 1px 0px #050505;
     }
 
-    .body {
-        padding: 16px;
-    }
+    .body { padding: 16px; }
+    .ctrd { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .items { display: flex; flex-direction: column; flex: 1; }
 
-    .ctrd {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+    .title { font-weight: bold !important; text-align: center; color: #cccccc; margin-bottom: 12px; }
 
-    .items {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-    }
-
-    .title {
-        font-weight: bold !important;
-        text-align: center;
-        color: #cccccc;
-        margin-bottom: 12px;
-    }
-
-    /* --- Form Elements styling adapted to your theme --- */
     input {
-        background: #191919;
-        border: 1px solid #323232;
-        color: #cccccc;
-        font-family: 'Verdana', sans-serif !important;
-        font-size: 13px;
-        padding: 6px 8px;
-        margin-bottom: 8px;
-        width: 165px;
-        box-sizing: border-box;
-        outline: none;
-        text-shadow: 1px 1px 0px #050505;
+        background: #191919; border: 1px solid #323232; color: #cccccc;
+        font-family: 'Verdana', sans-serif !important; font-size: 13px;
+        padding: 6px 8px; margin-bottom: 8px; width: 165px;
+        box-sizing: border-box; outline: none; text-shadow: 1px 1px 0px #050505;
     }
-
-    input:focus {
-        border: 1px solid #d17cf0;
-    }
-
-    input::placeholder {
-        color: #555555;
-    }
+    input:focus { border: 1px solid #d17cf0; }
+    input::placeholder { color: #555555; }
 
     .button {
-        border: 1px solid #323232;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 165px;
-        height: 24px;
-        padding-bottom: 3px;
-        margin-bottom: 8px;
-        margin-top: 4px;
-        background: linear-gradient(0deg, #191919, #232323);
-        outline: none;
-        font-weight: 700;
-        text-decoration: none;
-        color: #cccccc;
-        cursor: pointer;
+        border: 1px solid #323232; display: flex; justify-content: center; align-items: center;
+        width: 165px; height: 24px; padding-bottom: 3px; margin-bottom: 8px; margin-top: 4px;
+        background: linear-gradient(0deg, #191919, #232323); outline: none;
+        font-weight: 700; text-decoration: none; color: #cccccc; cursor: pointer;
     }
-
-    .button:hover {
-        background: linear-gradient(0deg, #232323, #343434);
-        border: 1px solid #d17cf0;
-    }
-
-    .button:active {
-        background: linear-gradient(0deg, #232323, #191919);
-    }
+    .button:hover { background: linear-gradient(0deg, #232323, #343434); border: 1px solid #d17cf0; }
+    .button:active { background: linear-gradient(0deg, #232323, #191919); }
 
     #status {
-        margin-top: 8px;
-        font-size: 11px !important;
-        text-align: center;
-        display: none;
-        max-width: 165px;
-        word-wrap: break-word;
+        margin-top: 8px; font-size: 11px !important; text-align: center;
+        display: none; max-width: 165px; word-wrap: break-word;
     }
-
     .status-success { color: #d17cf0 !important; display: block !important; }
     .status-error { color: #ff5555 !important; display: block !important; }
   </style>
@@ -253,10 +134,9 @@
   </div>
 
   <script>
-    // Cloudflare Worker URL
-    const WORKER_URL = 'https://spring-bread-4ac0.patricksavells.workers.dev/verify';
+    // UPDATED: Now points to /register instead of /verify
+    const WORKER_URL = 'https://spring-bread-4ac0.patricksavells.workers.dev/register';
 
-    // Form Submission
     async function handleVerify(event) {
         event.preventDefault();
 
@@ -267,7 +147,6 @@
         const submitBtn = document.getElementById('submitBtn');
         const statusDiv = document.getElementById('status');
 
-        // Loading state
         submitBtn.disabled = true;
         submitBtn.innerText = 'Working...';
         statusDiv.className = '';
@@ -290,7 +169,7 @@
 
             if (response.ok && data.success) {
                 statusDiv.className = 'status-success';
-                statusDiv.innerText = data.message || 'Success.';
+                statusDiv.innerText = `Success! UID: ${data.uid}`;
             } else {
                 statusDiv.className = 'status-error';
                 statusDiv.innerText = data.error || 'Failed.';
