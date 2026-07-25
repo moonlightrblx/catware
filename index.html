@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redeem Invite</title>
+  <style>
+    html,
+    body {
+        background: rgba(10, 10, 10, 0.9);
+        overflow: hidden;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .ctr {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    .bg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        min-width: 213px;
+        min-height: 135px;
+        width: max-content;
+        height: auto;
+        background: rgba(10, 10, 10, 0.9);
+        color: white;
+        z-index: 999999999;
+        border: 1px solid #050505;
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAlSURBVChTYxAREfnPw8PzHxeNogCGkfnEmQDDyDph/IF3A89/ABQxTIGh/maWAAAAAElFTkSuQmCC') repeat;
+        font-family: 'Verdana', sans-serif !important;
+        font-size: 13px !important;
+        color: #cccccc;
+    }
+
+    .border_light {
+        border: 1px solid #3c3c3c;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .border_dark {
+        border: 3px solid #282828;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .border_inside {
+        border: 1px solid #3c3c3c;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .rainbow_container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 3px;
+    }
+
+    .rainbow_1,
+    .rainbow_2 {
+        height: 1px;
+        width: 100%;
+        background-size: 200% 100%;
+        animation: shimmer 2s linear infinite;
+    }
+
+    .rainbow_1 {
+        background-image: linear-gradient(
+            to right,
+            #ff85c2, /* Soft hot pink */
+            #d17cf0, /* Lavender purple */
+            #ff99d1, /* Lighter pink */
+            #d17cf0,
+            #ff85c2
+        );
+    }
+
+    .rainbow_2 {
+        background-image: linear-gradient(
+            to right,
+            #a658c2, 
+            #d66bb3, 
+            #a658c2, 
+            #d66bb3, 
+            #a658c2
+        );
+        animation-delay: 1s;
+    }
+
+    .rainbow_3 {
+        height: 1px;
+        width: 100%;
+        background: #090909;
+    }
+
+    @keyframes shimmer {
+        0% {
+            background-position: -100% 50%;
+        }
+        100% {
+            background-position: 100% 50%;
+        }
+    }
+
+    .bg .items *,
+    .item,
+    .body {
+        font-family: 'Verdana' !important;
+        letter-spacing: normal !important;
+        font-size: 13px !important;
+        color: #cccccc;
+        font-weight: 500;
+        text-shadow: 1px 1px 0px #050505;
+    }
+
+    .body {
+        padding: 16px;
+    }
+
+    .ctrd {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .items {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .title {
+        font-weight: bold !important;
+        text-align: center;
+        color: #cccccc;
+        margin-bottom: 12px;
+    }
+
+    /* --- Form Elements styling adapted to your theme --- */
+    input {
+        background: #191919;
+        border: 1px solid #323232;
+        color: #cccccc;
+        font-family: 'Verdana', sans-serif !important;
+        font-size: 13px;
+        padding: 6px 8px;
+        margin-bottom: 8px;
+        width: 165px;
+        box-sizing: border-box;
+        outline: none;
+        text-shadow: 1px 1px 0px #050505;
+    }
+
+    input:focus {
+        border: 1px solid #d17cf0;
+    }
+
+    input::placeholder {
+        color: #555555;
+    }
+
+    .button {
+        border: 1px solid #323232;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 165px;
+        height: 24px;
+        padding-bottom: 3px;
+        margin-bottom: 8px;
+        margin-top: 4px;
+        background: linear-gradient(0deg, #191919, #232323);
+        outline: none;
+        font-weight: 700;
+        text-decoration: none;
+        color: #cccccc;
+        cursor: pointer;
+    }
+
+    .button:hover {
+        background: linear-gradient(0deg, #232323, #343434);
+        border: 1px solid #d17cf0;
+    }
+
+    .button:active {
+        background: linear-gradient(0deg, #232323, #191919);
+    }
+
+    #status {
+        margin-top: 8px;
+        font-size: 11px !important;
+        text-align: center;
+        display: none;
+        max-width: 165px;
+        word-wrap: break-word;
+    }
+
+    .status-success { color: #d17cf0 !important; display: block !important; }
+    .status-error { color: #ff5555 !important; display: block !important; }
+  </style>
+</head>
+<body>
+
+  <div class="ctr">
+      <div class="bg">
+          <div class="rainbow_container">
+              <div class="rainbow_1"></div>
+              <div class="rainbow_2"></div>
+              <div class="rainbow_3"></div>
+          </div>
+          <div class="border_light">
+              <div class="border_dark">
+                  <div class="border_inside">
+                      <div class="body ctrd">
+                          
+                          <div class="title">REDEEM INVITE</div>
+                          
+                          <div class="items">
+                              <form id="verifyForm" onsubmit="handleVerify(event)" class="ctrd">
+                                  <input type="text" id="key" placeholder="INVITE-KEY" required autocomplete="off" />
+                                  <input type="text" id="username" placeholder="Username" required autocomplete="username" />
+                                  <input type="password" id="password" placeholder="Password" required autocomplete="new-password" />
+                                  <button type="submit" id="submitBtn" class="button">Register</button>
+                              </form>
+                              
+                              <div id="status"></div>
+                          </div>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <script>
+    // Cloudflare Worker URL
+    const WORKER_URL = 'https://spring-bread-4ac0.patricksavells.workers.dev/verify';
+
+    // Form Submission
+    async function handleVerify(event) {
+        event.preventDefault();
+
+        const keyInput = document.getElementById('key').value.trim();
+        const usernameInput = document.getElementById('username').value.trim();
+        const passwordInput = document.getElementById('password').value;
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const statusDiv = document.getElementById('status');
+
+        // Loading state
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Working...';
+        statusDiv.className = '';
+        statusDiv.style.display = 'none';
+
+        try {
+            const response = await fetch(WORKER_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    key: keyInput,
+                    username: usernameInput,
+                    password: passwordInput
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                statusDiv.className = 'status-success';
+                statusDiv.innerText = data.message || 'Success.';
+            } else {
+                statusDiv.className = 'status-error';
+                statusDiv.innerText = data.error || 'Failed.';
+            }
+        } catch (err) {
+            statusDiv.className = 'status-error';
+            statusDiv.innerText = 'Connection error.';
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerText = 'Register';
+        }
+    }
+  </script>
+</body>
+</html>
